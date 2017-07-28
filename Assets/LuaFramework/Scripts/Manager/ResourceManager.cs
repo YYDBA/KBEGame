@@ -255,9 +255,6 @@ namespace LuaFramework {
         private AssetBundle shared, assetbundle;
         private Dictionary<string, AssetBundle> bundles;
 
-        void Awake() {
-        }
-
         /// <summary>
         /// 初始化
         /// </summary>

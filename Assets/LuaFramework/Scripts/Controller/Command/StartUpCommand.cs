@@ -19,7 +19,7 @@ public class StartUpCommand : ControllerCommand {
         AppFacade.Instance.AddManager<PanelManager>(ManagerName.Panel);
         AppFacade.Instance.AddManager<SoundManager>(ManagerName.Sound);
         AppFacade.Instance.AddManager<TimerManager>(ManagerName.Timer);
-        AppFacade.Instance.AddManager<NetworkManager>(ManagerName.Network);
+        //AppFacade.Instance.AddManager<NetworkManager>(ManagerName.Network);
         AppFacade.Instance.AddManager<ResourceManager>(ManagerName.Resource);
         AppFacade.Instance.AddManager<ThreadManager>(ManagerName.Thread);
         AppFacade.Instance.AddManager<ObjectPoolManager>(ManagerName.ObjectPool);
