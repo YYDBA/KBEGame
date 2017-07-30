@@ -24,8 +24,8 @@ public class DelegateFactory
 		dict.Add(typeof(System.Comparison<int>), factory.System_Comparison_int);
 		dict.Add(typeof(System.Func<int,int>), factory.System_Func_int_int);
 		dict.Add(typeof(UnityEngine.Camera.CameraCallback), factory.UnityEngine_Camera_CameraCallback);
-		dict.Add(typeof(UnityEngine.Application.LogCallback), factory.UnityEngine_Application_LogCallback);
 		dict.Add(typeof(UnityEngine.Application.AdvertisingIdentifierCallback), factory.UnityEngine_Application_AdvertisingIdentifierCallback);
+		dict.Add(typeof(UnityEngine.Application.LogCallback), factory.UnityEngine_Application_LogCallback);
 		dict.Add(typeof(UnityEngine.AudioClip.PCMReaderCallback), factory.UnityEngine_AudioClip_PCMReaderCallback);
 		dict.Add(typeof(UnityEngine.AudioClip.PCMSetPositionCallback), factory.UnityEngine_AudioClip_PCMSetPositionCallback);
 		dict.Add(typeof(UnityEngine.RectTransform.ReapplyDrivenProperties), factory.UnityEngine_RectTransform_ReapplyDrivenProperties);
@@ -38,8 +38,8 @@ public class DelegateFactory
 		DelegateTraits<System.Comparison<int>>.Init(factory.System_Comparison_int);
 		DelegateTraits<System.Func<int,int>>.Init(factory.System_Func_int_int);
 		DelegateTraits<UnityEngine.Camera.CameraCallback>.Init(factory.UnityEngine_Camera_CameraCallback);
-		DelegateTraits<UnityEngine.Application.LogCallback>.Init(factory.UnityEngine_Application_LogCallback);
 		DelegateTraits<UnityEngine.Application.AdvertisingIdentifierCallback>.Init(factory.UnityEngine_Application_AdvertisingIdentifierCallback);
+		DelegateTraits<UnityEngine.Application.LogCallback>.Init(factory.UnityEngine_Application_LogCallback);
 		DelegateTraits<UnityEngine.AudioClip.PCMReaderCallback>.Init(factory.UnityEngine_AudioClip_PCMReaderCallback);
 		DelegateTraits<UnityEngine.AudioClip.PCMSetPositionCallback>.Init(factory.UnityEngine_AudioClip_PCMSetPositionCallback);
 		DelegateTraits<UnityEngine.RectTransform.ReapplyDrivenProperties>.Init(factory.UnityEngine_RectTransform_ReapplyDrivenProperties);
@@ -52,8 +52,8 @@ public class DelegateFactory
 		TypeTraits<System.Comparison<int>>.Init(factory.Check_System_Comparison_int);
 		TypeTraits<System.Func<int,int>>.Init(factory.Check_System_Func_int_int);
 		TypeTraits<UnityEngine.Camera.CameraCallback>.Init(factory.Check_UnityEngine_Camera_CameraCallback);
-		TypeTraits<UnityEngine.Application.LogCallback>.Init(factory.Check_UnityEngine_Application_LogCallback);
 		TypeTraits<UnityEngine.Application.AdvertisingIdentifierCallback>.Init(factory.Check_UnityEngine_Application_AdvertisingIdentifierCallback);
+		TypeTraits<UnityEngine.Application.LogCallback>.Init(factory.Check_UnityEngine_Application_LogCallback);
 		TypeTraits<UnityEngine.AudioClip.PCMReaderCallback>.Init(factory.Check_UnityEngine_AudioClip_PCMReaderCallback);
 		TypeTraits<UnityEngine.AudioClip.PCMSetPositionCallback>.Init(factory.Check_UnityEngine_AudioClip_PCMSetPositionCallback);
 		TypeTraits<UnityEngine.RectTransform.ReapplyDrivenProperties>.Init(factory.Check_UnityEngine_RectTransform_ReapplyDrivenProperties);
@@ -66,8 +66,8 @@ public class DelegateFactory
 		StackTraits<System.Comparison<int>>.Push = factory.Push_System_Comparison_int;
 		StackTraits<System.Func<int,int>>.Push = factory.Push_System_Func_int_int;
 		StackTraits<UnityEngine.Camera.CameraCallback>.Push = factory.Push_UnityEngine_Camera_CameraCallback;
-		StackTraits<UnityEngine.Application.LogCallback>.Push = factory.Push_UnityEngine_Application_LogCallback;
 		StackTraits<UnityEngine.Application.AdvertisingIdentifierCallback>.Push = factory.Push_UnityEngine_Application_AdvertisingIdentifierCallback;
+		StackTraits<UnityEngine.Application.LogCallback>.Push = factory.Push_UnityEngine_Application_LogCallback;
 		StackTraits<UnityEngine.AudioClip.PCMReaderCallback>.Push = factory.Push_UnityEngine_AudioClip_PCMReaderCallback;
 		StackTraits<UnityEngine.AudioClip.PCMSetPositionCallback>.Push = factory.Push_UnityEngine_AudioClip_PCMSetPositionCallback;
 		StackTraits<UnityEngine.RectTransform.ReapplyDrivenProperties>.Push = factory.Push_UnityEngine_RectTransform_ReapplyDrivenProperties;
@@ -588,67 +588,6 @@ public class DelegateFactory
 		ToLua.Push(L, o);
 	}
 
-	class UnityEngine_Application_LogCallback_Event : LuaDelegate
-	{
-		public UnityEngine_Application_LogCallback_Event(LuaFunction func) : base(func) { }
-		public UnityEngine_Application_LogCallback_Event(LuaFunction func, LuaTable self) : base(func, self) { }
-
-		public void Call(string param0, string param1, UnityEngine.LogType param2)
-		{
-			func.BeginPCall();
-			func.Push(param0);
-			func.Push(param1);
-			func.Push(param2);
-			func.PCall();
-			func.EndPCall();
-		}
-
-		public void CallWithSelf(string param0, string param1, UnityEngine.LogType param2)
-		{
-			func.BeginPCall();
-			func.Push(self);
-			func.Push(param0);
-			func.Push(param1);
-			func.Push(param2);
-			func.PCall();
-			func.EndPCall();
-		}
-	}
-
-	public UnityEngine.Application.LogCallback UnityEngine_Application_LogCallback(LuaFunction func, LuaTable self, bool flag)
-	{
-		if (func == null)
-		{
-			UnityEngine.Application.LogCallback fn = delegate(string param0, string param1, UnityEngine.LogType param2) { };
-			return fn;
-		}
-
-		if(!flag)
-		{
-			UnityEngine_Application_LogCallback_Event target = new UnityEngine_Application_LogCallback_Event(func);
-			UnityEngine.Application.LogCallback d = target.Call;
-			target.method = d.Method;
-			return d;
-		}
-		else
-		{
-			UnityEngine_Application_LogCallback_Event target = new UnityEngine_Application_LogCallback_Event(func, self);
-			UnityEngine.Application.LogCallback d = target.CallWithSelf;
-			target.method = d.Method;
-			return d;
-		}
-	}
-
-	bool Check_UnityEngine_Application_LogCallback(IntPtr L, int pos)
-	{
-		return TypeChecker.CheckDelegateType(typeof(UnityEngine.Application.LogCallback), L, pos);
-	}
-
-	void Push_UnityEngine_Application_LogCallback(IntPtr L, UnityEngine.Application.LogCallback o)
-	{
-		ToLua.Push(L, o);
-	}
-
 	class UnityEngine_Application_AdvertisingIdentifierCallback_Event : LuaDelegate
 	{
 		public UnityEngine_Application_AdvertisingIdentifierCallback_Event(LuaFunction func) : base(func) { }
@@ -706,6 +645,67 @@ public class DelegateFactory
 	}
 
 	void Push_UnityEngine_Application_AdvertisingIdentifierCallback(IntPtr L, UnityEngine.Application.AdvertisingIdentifierCallback o)
+	{
+		ToLua.Push(L, o);
+	}
+
+	class UnityEngine_Application_LogCallback_Event : LuaDelegate
+	{
+		public UnityEngine_Application_LogCallback_Event(LuaFunction func) : base(func) { }
+		public UnityEngine_Application_LogCallback_Event(LuaFunction func, LuaTable self) : base(func, self) { }
+
+		public void Call(string param0, string param1, UnityEngine.LogType param2)
+		{
+			func.BeginPCall();
+			func.Push(param0);
+			func.Push(param1);
+			func.Push(param2);
+			func.PCall();
+			func.EndPCall();
+		}
+
+		public void CallWithSelf(string param0, string param1, UnityEngine.LogType param2)
+		{
+			func.BeginPCall();
+			func.Push(self);
+			func.Push(param0);
+			func.Push(param1);
+			func.Push(param2);
+			func.PCall();
+			func.EndPCall();
+		}
+	}
+
+	public UnityEngine.Application.LogCallback UnityEngine_Application_LogCallback(LuaFunction func, LuaTable self, bool flag)
+	{
+		if (func == null)
+		{
+			UnityEngine.Application.LogCallback fn = delegate(string param0, string param1, UnityEngine.LogType param2) { };
+			return fn;
+		}
+
+		if(!flag)
+		{
+			UnityEngine_Application_LogCallback_Event target = new UnityEngine_Application_LogCallback_Event(func);
+			UnityEngine.Application.LogCallback d = target.Call;
+			target.method = d.Method;
+			return d;
+		}
+		else
+		{
+			UnityEngine_Application_LogCallback_Event target = new UnityEngine_Application_LogCallback_Event(func, self);
+			UnityEngine.Application.LogCallback d = target.CallWithSelf;
+			target.method = d.Method;
+			return d;
+		}
+	}
+
+	bool Check_UnityEngine_Application_LogCallback(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(UnityEngine.Application.LogCallback), L, pos);
+	}
+
+	void Push_UnityEngine_Application_LogCallback(IntPtr L, UnityEngine.Application.LogCallback o)
 	{
 		ToLua.Push(L, o);
 	}

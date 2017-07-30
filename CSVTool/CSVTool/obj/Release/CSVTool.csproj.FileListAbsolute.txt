@@ -1,0 +1,6 @@
+D:\Work\UnityProjects\KBEGame\CSVTool\CSVTool\bin\Release\CSVTool.exe.config
+D:\Work\UnityProjects\KBEGame\CSVTool\CSVTool\bin\Release\CSVTool.exe
+D:\Work\UnityProjects\KBEGame\CSVTool\CSVTool\bin\Release\CSVTool.pdb
+D:\Work\UnityProjects\KBEGame\CSVTool\CSVTool\obj\Release\CSVTool.exe
+D:\Work\UnityProjects\KBEGame\CSVTool\CSVTool\obj\Release\CSVTool.pdb
+D:\Work\UnityProjects\KBEGame\CSVTool\CSVTool\obj\Release\CSVTool.csprojResolveAssemblyReference.cache

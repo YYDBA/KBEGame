@@ -49,8 +49,8 @@ function Game.OnInitOK()
 
     CtrlManager.Init();
     local ctrl = CtrlManager.GetCtrl(CtrlNames.Prompt);
-    if ctrl ~= nil and AppConst.ExampleMode == 1 then
-        ctrl:Awake();
+	if ctrl ~= nil and AppConst.ExampleMode == 1 then
+		ctrl:Awake();
     end
        
     logWarn('LuaFramework InitOK--->>>');
@@ -62,8 +62,8 @@ function Game.test_coroutine()
     coroutine.wait(1);	
     logWarn("2222");
 	
-    local www = WWW("http://bbs.ulua.org/readme.txt");
-    coroutine.www(www);
+	local www = WWW("http://bbs.ulua.org/readme.txt");
+	coroutine.www(www);
     logWarn(www.text);    	
 end
 

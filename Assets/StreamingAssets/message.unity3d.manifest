@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1672682890
+CRC: 4216615191
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d698b30f64ef237014cd58be6a2f20bf
+    Hash: f9fda1f3111a99f0f024c98361181ff9
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 061ea1f9b2d733c41b20d24ce076ea7a
+    Hash: d4468eb27d65f04b2bf6459158a8fd8d
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -40,4 +40,4 @@ ClassTypes:
 Assets:
 - Assets/LuaFramework/Examples/Builds/Message/MessagePanel.prefab
 Dependencies:
-- Assets/StreamingAssets/shared_asset.unity3d
+- D:/Work/UnityProjects/KBEGame/Assets/StreamingAssets/shared_asset.unity3d

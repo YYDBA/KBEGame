@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2252532106
+CRC: 750085930
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: cfd8e00a2da76595f094a5f01aa3d72f
+    Hash: c3c1474429a2c01dac625e396a20cc6e
   TypeTreeHash:
     serializedVersion: 2
     Hash: 1033bf7ddfd4c6d43e7a6382c0a0a61a
@@ -12,8 +12,8 @@ ClassTypes:
 - Class: 49
   Script: {instanceID: 0}
 Assets:
-- Assets/Lua/misc/misc.lua.bytes
-- Assets/Lua/misc/functions.lua.bytes
 - Assets/Lua/misc/strict.lua.bytes
+- Assets/Lua/misc/functions.lua.bytes
+- Assets/Lua/misc/misc.lua.bytes
 - Assets/Lua/misc/utf8.lua.bytes
 Dependencies: []

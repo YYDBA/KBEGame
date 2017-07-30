@@ -31,7 +31,6 @@ public class KBEMain : MonoBehaviour
 		DontDestroyOnLoad(transform.gameObject);
 	 }
  
-	// Use this for initialization
 	void Start () 
 	{
 		MonoBehaviour.print("clientapp::start()");
@@ -45,12 +44,8 @@ public class KBEMain : MonoBehaviour
 	
 	public virtual void initKBEngine()
 	{
-		// 如果此处发生错误，请查看 Assets\Scripts\kbe_scripts\if_Entity_error_use______git_submodule_update_____kbengine_plugins_______open_this_file_and_I_will_tell_you.cs
-
 		Dbg.debugLevel = debugLevel;
-
 		KBEngineArgs args = new KBEngineArgs();
-		
 		args.ip = ip;
 		args.port = port;
 		args.clientType = clientType;
