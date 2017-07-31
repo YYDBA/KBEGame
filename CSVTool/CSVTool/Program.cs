@@ -12,7 +12,7 @@ namespace CSVTool
         static void Main(string[] args)
         {
             //args = new string[1];
-            //args[0] = @"D:\Work\UnityProjects\KBEGame\CSVTool\CSVTool\bin\Release\CSVDir\Language.csv";
+            //args[0] = @"E:\Mine\KBEGameDir\KBEGame\CSVTool\CSVTool\bin\Release\CSVDir\ppp.csv";
             if (args.Length < 1)
                 return;
             ParseArg(args);

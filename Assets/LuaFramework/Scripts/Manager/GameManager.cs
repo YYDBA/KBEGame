@@ -24,7 +24,6 @@ namespace LuaFramework {
         /// </summary>
         void Init() {
             DontDestroyOnLoad(gameObject);  //防止销毁自己
-
             CheckExtractResource(); //释放资源
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
             Application.targetFrameRate = AppConst.GameFrameRate;

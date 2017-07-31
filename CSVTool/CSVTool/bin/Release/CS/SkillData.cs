@@ -1,4 +1,4 @@
-public class ppp{
+public class SkillData{
 	public int ID;
 	public string SkillName;
 }

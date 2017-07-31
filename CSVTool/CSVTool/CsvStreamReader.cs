@@ -292,7 +292,7 @@ public class CsvStreamReader
     private string GetDeleteQuotaDataLine(string fileDataLine)
     {
         return fileDataLine.Replace("\"\"", "\"");
-        }
+    }
     /// <summary>
     /// 判断字符串是否包含奇数个引号
     /// </summary>
@@ -460,7 +460,7 @@ public class CsvStreamReader
             if (fileCellData.Length > 2 && fileCellData[0] == '\"')
             {
                 fileCellData = fileCellData.Substring(1, fileCellData.Length - 2).Replace("\"\"", "\""); //去掉首尾引号，然后把双引号变成单引号
-                }
+            }
         }
         return fileCellData;
     }
@@ -498,6 +498,8 @@ public class CsvStreamReader
 
     private void GenBytesFile()
     {
+        string splitCode = ((char)0x02).ToString();
+
         if (shotName.Equals("Language"))
         {
             ArrayList col0 = (ArrayList)this.rowAL[0];
@@ -508,7 +510,7 @@ public class CsvStreamReader
                 for (int i = 1; i < RowCount; ++i)
                 {
                     ArrayList col = (ArrayList)this.rowAL[i];
-                    str += col[0]+"," + col[j] + "\r\n";
+                    str += col[0]+ splitCode + col[j] + "\r\n";
                 }
                 string bytePath = pathDir + "Bytes/"+ _name + ".bytes";
                 if (File.Exists(bytePath))
@@ -533,7 +535,7 @@ public class CsvStreamReader
                 int j = 0;
                 for (; j < ColCount - 1; ++j)
                 {
-                    str += col[j] + ",";
+                    str += col[j] + splitCode;
                 }
                 str += col[j]+"\r\n";
             }
