@@ -7,7 +7,7 @@ if jit then
 	if jit.opt then		
 		jit.opt.start(3)				
 	end		
-	
+
 	print("ver"..jit.version_num.." jit: ", jit.status())
 	print(string.format("os: %s, arch: %s", jit.os, jit.arch))
 end
@@ -52,7 +52,7 @@ if jit then
 			local q1 = Quaternion.Euler(i, i, i)				
 			Quaternion.Slerp(Quaternion.identity, q1, 0.5)		
 		end	
-		
+
 		jit.flush(true)
 	end	
 

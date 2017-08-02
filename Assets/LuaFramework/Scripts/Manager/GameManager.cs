@@ -12,10 +12,12 @@ namespace LuaFramework {
         protected static bool initialize = false;
         private List<string> downloadFiles = new List<string>();
 
-        /// <summary>
-        /// 初始化游戏管理器
-        /// </summary>
-        void Awake() {
+        void Awake()
+        {
+            UIManager.Instance.Push(Const.UI.UILOADING);
+        }
+        void Start()
+        {
             Init();
         }
 
@@ -23,10 +25,24 @@ namespace LuaFramework {
         /// 初始化
         /// </summary>
         void Init() {
-            DontDestroyOnLoad(gameObject);  //防止销毁自己
-            CheckExtractResource(); //释放资源
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
             Application.targetFrameRate = AppConst.GameFrameRate;
+            if(CheckNetWork())
+            {
+                facade.SendMessageCommand(NotiConst.UPDATE_MESSAGE, LanguageManager.Instance.Get("UILoading_vaildversion"));
+                CheckExtractResource();
+            }
+        }
+
+        public bool CheckNetWork()
+        {
+            facade.SendMessageCommand(NotiConst.UPDATE_MESSAGE, LanguageManager.Instance.Get("UILoading_connect"));
+            if (Application.internetReachability == NetworkReachability.NotReachable)
+            {
+                UIToastView.Instance.Show(LanguageManager.Instance.Get("NetWork_noteachable"));
+                return false;
+            }
+            return true;
         }
 
         /// <summary>
@@ -54,8 +70,6 @@ namespace LuaFramework {
             if (File.Exists(outfile)) File.Delete(outfile);
 
             string message = "正在解包文件:>files.txt";
-            Debug.Log(infile);
-            Debug.Log(outfile);
             if (Application.platform == RuntimePlatform.Android) {
                 WWW www = new WWW(infile);
                 yield return www;
@@ -114,15 +128,16 @@ namespace LuaFramework {
                 OnResourceInited();
                 yield break;
             }
+            facade.SendMessageCommand(NotiConst.UPDATE_MESSAGE, LanguageManager.Instance.Get("UILoading_readyupdate"));
             string dataPath = Util.DataPath;  //数据目录
             string url = AppConst.WebUrl;
-            string message = string.Empty;
             string random = DateTime.Now.ToString("yyyymmddhhmmss");
             string listUrl = url + "files.txt?v=" + random;
-            Debug.LogWarning("LoadUpdate---->>>" + listUrl);
 
-            WWW www = new WWW(listUrl); yield return www;
+            WWW www = new WWW(listUrl);
+            yield return www;
             if (www.error != null) {
+                Debug.LogError(www.error+":"+ listUrl);
                 OnUpdateFailed(string.Empty);
                 yield break;
             }
@@ -131,9 +146,9 @@ namespace LuaFramework {
             }
             File.WriteAllBytes(dataPath + "files.txt", www.bytes);
             string filesText = www.text;
-            string[] files = filesText.Split('\n');
-
-            for (int i = 0; i < files.Length; i++) {
+            string[] files = filesText.Split(new char[] { '\n'}, StringSplitOptions.RemoveEmptyEntries);
+            int total = files.Length;
+            for (int i = 0; i < total; i++) {
                 if (string.IsNullOrEmpty(files[i])) continue;
                 string[] keyValue = files[i].Split('|');
                 string f = keyValue[0];
@@ -150,27 +165,16 @@ namespace LuaFramework {
                     canUpdate = !remoteMd5.Equals(localMd5);
                     if (canUpdate) File.Delete(localfile);
                 }
+                Debug.LogError("PP:" + i + ":" + total + ":" + fileUrl);
+                facade.SendMessageCommand(NotiConst.UPDATE_DOWNLOAD_FILE, (i+1) / (float)total);
                 if (canUpdate) {   //本地缺少文件
-                    Debug.Log(fileUrl);
-                    message = "downloading>>" + fileUrl;
-                    facade.SendMessageCommand(NotiConst.UPDATE_MESSAGE, message);
-                    /*
-                    www = new WWW(fileUrl); yield return www;
-                    if (www.error != null) {
-                        OnUpdateFailed(path);   //
-                        yield break;
-                    }
-                    File.WriteAllBytes(localfile, www.bytes);
-                     */
-                    //这里都是资源文件，用线程下载
-                    BeginDownload(fileUrl, localfile);
+                    BeginDownload(fileUrl, localfile);//这里都是资源文件，用线程下载
                     while (!(IsDownOK(localfile))) { yield return new WaitForEndOfFrame(); }
                 }
             }
             yield return new WaitForEndOfFrame();
 
-            message = "更新完成!!";
-            facade.SendMessageCommand(NotiConst.UPDATE_MESSAGE, message);
+            //facade.SendMessageCommand(NotiConst.UPDATE_MESSAGE, LanguageManager.Instance.Get("Update over"));
 
             OnResourceInited();
         }
@@ -239,31 +243,31 @@ namespace LuaFramework {
             initialize = true;
 
             //类对象池测试
-            var classObjPool = ObjPoolManager.CreatePool<TestObjectClass>(OnPoolGetElement, OnPoolPushElement);
+            //var classObjPool = ObjPoolManager.CreatePool<TestObjectClass>(OnPoolGetElement, OnPoolPushElement);
             //方法1
             //objPool.Release(new TestObjectClass("abcd", 100, 200f));
             //var testObj1 = objPool.Get();
 
             //方法2
-            ObjPoolManager.Release<TestObjectClass>(new TestObjectClass("abcd", 100, 200f));
-            var testObj1 = ObjPoolManager.Get<TestObjectClass>();
+            //ObjPoolManager.Release<TestObjectClass>(new TestObjectClass("abcd", 100, 200f));
+            //var testObj1 = ObjPoolManager.Get<TestObjectClass>();
 
-            Debugger.Log("TestObjectClass--->>>" + testObj1.ToString());
+            //Debugger.Log("TestObjectClass--->>>" + testObj1.ToString());
 
-            //游戏对象池测试
-            var prefab = Resources.Load("TestGameObjectPrefab", typeof(GameObject)) as GameObject;
-            var gameObjPool = ObjPoolManager.CreatePool("TestGameObject", 5, 10, prefab);
+            ////游戏对象池测试
+            //var prefab = Resources.Load("TestGameObjectPrefab", typeof(GameObject)) as GameObject;
+            //var gameObjPool = ObjPoolManager.CreatePool("TestGameObject", 5, 10, prefab);
 
-            var gameObj = Instantiate(prefab) as GameObject;
-            gameObj.name = "TestGameObject_01";
-            gameObj.transform.localScale = Vector3.one;
-            gameObj.transform.localPosition = Vector3.zero;
+            //var gameObj = Instantiate(prefab) as GameObject;
+            //gameObj.name = "TestGameObject_01";
+            //gameObj.transform.localScale = Vector3.one;
+            //gameObj.transform.localPosition = Vector3.zero;
 
-            ObjPoolManager.Release("TestGameObject", gameObj);
-            var backObj = ObjPoolManager.Get("TestGameObject");
-            backObj.transform.SetParent(null);
+            //ObjPoolManager.Release("TestGameObject", gameObj);
+            //var backObj = ObjPoolManager.Get("TestGameObject");
+            //backObj.transform.SetParent(null);
 
-            Debug.Log("TestGameObject--->>>" + backObj);
+            //Debug.Log("TestGameObject--->>>" + backObj);
         }
 
         /// <summary>

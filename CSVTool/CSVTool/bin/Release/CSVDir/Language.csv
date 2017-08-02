@@ -2,3 +2,8 @@
 ID,CN,EN
 uilogin_login,登录,Login
 uilogin_username,用户名,UserName
+UILoading_connect,正在连接服务器,
+NetWork_noteachable,访问网络出错，请检查网络设置,
+UILoading_vaildversion,正在检测版本号,
+UILoading_readyupdate,准备更新文件,
+UILoading_updatefile,正在更新文件:{0},

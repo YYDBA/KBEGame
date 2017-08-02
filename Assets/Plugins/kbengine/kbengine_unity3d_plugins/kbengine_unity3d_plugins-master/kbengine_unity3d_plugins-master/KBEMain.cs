@@ -25,11 +25,6 @@ public class KBEMain : MonoBehaviour
 	public int RECV_BUFFER_MAX = (int)KBEngine.NetworkInterface.TCP_PACKET_MAX;
 	public bool useAliasEntityID = true;
 	public bool isOnInitCallPropertysSetMethods = true;
-
-	void Awake() 
-	 {
-		DontDestroyOnLoad(transform.gameObject);
-	 }
  
 	void Start () 
 	{
