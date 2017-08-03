@@ -110,12 +110,11 @@ namespace LuaFramework {
             string value = string.Format("{0} kb/s", (e.BytesReceived / 1024d / sw.Elapsed.TotalSeconds).ToString("0.00"));
             NotiData data = new NotiData(NotiConst.UPDATE_PROGRESS, value);
             if (m_SyncEvent != null) m_SyncEvent(data);
-
             if (e.ProgressPercentage == 100 && e.BytesReceived == e.TotalBytesToReceive) {
                 sw.Reset();
 
-                data = new NotiData(NotiConst.UPDATE_DOWNLOAD, currDownFile);
-                if (m_SyncEvent != null) m_SyncEvent(data);
+                NotiData filedata = new NotiData(NotiConst.UPDATE_DOWNLOAD, currDownFile);
+                if (m_SyncEvent != null) m_SyncEvent(filedata);
             }
         }
 

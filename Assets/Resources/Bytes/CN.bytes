@@ -1,7 +1,10 @@
-uilogin_loginµÇÂ¼
-uilogin_usernameÓÃ»§Ãû
-UILoading_connectÕıÔÚÁ¬½Ó·şÎñÆ÷
-NetWork_noteachable·ÃÎÊÍøÂç³ö´í£¬Çë¼ì²éÍøÂçÉèÖÃ
-UILoading_vaildversionÕıÔÚ¼ì²â°æ±¾ºÅ
-UILoading_readyupdate×¼±¸¸üĞÂÎÄ¼ş
-UILoading_updatefileÕıÔÚ¸üĞÂÎÄ¼ş:{0}
+uilogin_loginç™»å½•
+uilogin_usernameç”¨æˆ·å
+UILoading_connectæ­£åœ¨è¿æ¥æœåŠ¡å™¨
+NetWork_noteachableè®¿é—®ç½‘ç»œå‡ºé”™ï¼Œè¯·æ£€æŸ¥ç½‘ç»œè®¾ç½®
+UILoading_vaildversionæ­£åœ¨æ£€æµ‹ç‰ˆæœ¬å·
+UILoading_readyupdateå‡†å¤‡æ›´æ–°æ–‡ä»¶
+UILoading_updatefileæ­£åœ¨æ›´æ–°æ–‡ä»¶:{0}
+UILoading_updatefailæ›´æ–°å¤±è´¥
+UILoading_extractresæ­£åœ¨è§£å‹æ–‡ä»¶,æ­¤è¿‡ç¨‹ä¸ä¼šäº§ç”Ÿä»»ä½•æµé‡æ¶ˆè€—
+UILoading_updateoveræ¸¸æˆæ›´æ–°å®Œæ¯•ï¼Œè¯·äº«å—æ„‰å¿«æ¸¸æˆæ—¶å…‰

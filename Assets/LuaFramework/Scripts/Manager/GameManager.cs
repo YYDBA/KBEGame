@@ -16,6 +16,7 @@ namespace LuaFramework {
         {
             UIManager.Instance.Push(Const.UI.UILOADING);
         }
+
         void Start()
         {
             Init();
@@ -69,7 +70,9 @@ namespace LuaFramework {
             string outfile = dataPath + "files.txt";
             if (File.Exists(outfile)) File.Delete(outfile);
 
-            string message = "正在解包文件:>files.txt";
+            facade.SendMessageCommand(NotiConst.UPDATE_MESSAGE, LanguageManager.Instance.Get("UILoading_extractres"));
+            yield return new WaitForSeconds(1f);
+            facade.SendMessageCommand(NotiConst.UPDATE_DOWNLOAD_FILE, 0);
             if (Application.platform == RuntimePlatform.Android) {
                 WWW www = new WWW(infile);
                 yield return www;
@@ -83,14 +86,12 @@ namespace LuaFramework {
 
             //释放所有文件到数据目录
             string[] files = File.ReadAllLines(outfile);
-            foreach (var file in files) {
+            int total = files.Length;
+            for (int i = 0;i<total;++i) {
+                var file = files[i];
                 string[] fs = file.Split('|');
                 infile = resPath + fs[0];  //
                 outfile = dataPath + fs[0];
-
-                message = "正在解包文件:>" + fs[0];
-                Debug.Log("正在解包文件:>" + infile);
-                facade.SendMessageCommand(NotiConst.UPDATE_MESSAGE, message);
 
                 string dir = Path.GetDirectoryName(outfile);
                 if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
@@ -110,12 +111,10 @@ namespace LuaFramework {
                     File.Copy(infile, outfile, true);
                 }
                 yield return new WaitForEndOfFrame();
+                facade.SendMessageCommand(NotiConst.UPDATE_DOWNLOAD_FILE, (i + 1) / (float)total);
             }
-            message = "解包完成!!!";
-            facade.SendMessageCommand(NotiConst.UPDATE_MESSAGE, message);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(2f);
 
-            message = string.Empty;
             //释放完成，开始启动更新资源
             StartCoroutine(OnUpdateResource());
         }
@@ -128,7 +127,10 @@ namespace LuaFramework {
                 OnResourceInited();
                 yield break;
             }
+            yield return new WaitForEndOfFrame();
             facade.SendMessageCommand(NotiConst.UPDATE_MESSAGE, LanguageManager.Instance.Get("UILoading_readyupdate"));
+            yield return new WaitForEndOfFrame();
+            facade.SendMessageCommand(NotiConst.UPDATE_DOWNLOAD_FILE,0);
             string dataPath = Util.DataPath;  //数据目录
             string url = AppConst.WebUrl;
             string random = DateTime.Now.ToString("yyyymmddhhmmss");
@@ -137,7 +139,6 @@ namespace LuaFramework {
             WWW www = new WWW(listUrl);
             yield return www;
             if (www.error != null) {
-                Debug.LogError(www.error+":"+ listUrl);
                 OnUpdateFailed(string.Empty);
                 yield break;
             }
@@ -165,7 +166,6 @@ namespace LuaFramework {
                     canUpdate = !remoteMd5.Equals(localMd5);
                     if (canUpdate) File.Delete(localfile);
                 }
-                Debug.LogError("PP:" + i + ":" + total + ":" + fileUrl);
                 facade.SendMessageCommand(NotiConst.UPDATE_DOWNLOAD_FILE, (i+1) / (float)total);
                 if (canUpdate) {   //本地缺少文件
                     BeginDownload(fileUrl, localfile);//这里都是资源文件，用线程下载
@@ -173,15 +173,14 @@ namespace LuaFramework {
                 }
             }
             yield return new WaitForEndOfFrame();
-
-            //facade.SendMessageCommand(NotiConst.UPDATE_MESSAGE, LanguageManager.Instance.Get("Update over"));
-
+            facade.SendMessageCommand(NotiConst.UPDATE_DOWNLOAD_FILE, 1);
+            yield return new WaitForSeconds(2f);
+            facade.SendMessageCommand(NotiConst.UPDATE_MESSAGE, LanguageManager.Instance.Get("UILoading_updateover"));
             OnResourceInited();
         }
 
         void OnUpdateFailed(string file) {
-            string message = "更新失败!>" + file;
-            facade.SendMessageCommand(NotiConst.UPDATE_MESSAGE, message);
+            facade.SendMessageCommand(NotiConst.UPDATE_MESSAGE, LanguageManager.Instance.Get("UILoading_updatefail"));
         }
 
         /// <summary>

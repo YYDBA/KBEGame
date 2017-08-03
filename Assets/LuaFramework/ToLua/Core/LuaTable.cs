@@ -1001,9 +1001,9 @@ namespace LuaInterface
 
     public struct LuaDictEntry<K, V>
     {
-        public LuaDictEntry(K key, V value)
+        public LuaDictEntry(K key, V value):this()
         {
-            Key = key;
+            this.Key = key;
             Value = value;
         }
 

@@ -54,7 +54,7 @@ public class LanguageManager
     {
         char STX = (char)0x02;
         stringDict = new Dictionary<string, string>();
-        string txt = System.Text.Encoding.Default.GetString(content);
+        string txt = System.Text.Encoding.UTF8.GetString(content);
         string[] rows = txt.Split(new string[]{ "\r\n"},StringSplitOptions.RemoveEmptyEntries);
         for(int i = 0;i <rows.Length;++i)
         {

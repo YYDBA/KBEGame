@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,10 +7,11 @@ using UnityEngine.UI;
 
 public class UILoadingView : View
 {
-    public Slider _slider;
-    public Text _tip;
-    public Text _progress;
+    private Slider _slider;
+    private Text _tip;
+    private Text _progress;
     protected string file = "";
+    Tweener tween;
     List<string> MessageList
     {
         get
@@ -18,7 +20,6 @@ public class UILoadingView : View
             {
                 NotiConst.UPDATE_MESSAGE,
                 NotiConst.UPDATE_EXTRACT,
-                NotiConst.UPDATE_DOWNLOAD,
                 NotiConst.UPDATE_DOWNLOAD_FILE,
                 NotiConst.UPDATE_PROGRESS,
             };
@@ -47,16 +48,16 @@ public class UILoadingView : View
         data = message;
         switch (name)
         {
-            case NotiConst.UPDATE_MESSAGE:      //更新消息
+            case NotiConst.UPDATE_MESSAGE:
                 task = UpdateMessage;
                 break;
-            case NotiConst.UPDATE_EXTRACT:      //更新解压
+            case NotiConst.UPDATE_EXTRACT:
                 task = UpdateExtract;
                 break;
-            case NotiConst.UPDATE_DOWNLOAD_FILE:     //更新下载
-                task = UpdateDownload;
+            case NotiConst.UPDATE_DOWNLOAD_FILE:
+                task = UpdateDownloadFile;
                 break;
-            case NotiConst.UPDATE_PROGRESS:     //更新下载进度
+            case NotiConst.UPDATE_PROGRESS:
                 task = UpdateProgress;
                 break;
         }
@@ -80,16 +81,30 @@ public class UILoadingView : View
     {
     }
 
-    public void UpdateDownload()
+    public void UpdateDownloadFile()
     {
-        Debug.LogError(data.Body.ToString());
         float value = float.Parse(data.Body.ToString());
-        _slider.value = value;
-        string.Format(LanguageManager.Instance.Get("UILoading_updatefile"), value.ToString());
+        if(value == 0)
+        {
+            if(tween != null)
+            {
+                tween.Kill(false);
+            }
+            _slider.value = value;
+        }
+        else
+        {
+            tween = _slider.DOValue(value,1f);
+        }
     }
 
     public void UpdateProgress()
     {
          _progress.text = data.Body.ToString();
+    }
+
+    public void Slider_OnChanged()
+    {
+        _tip.text = string.Format(LanguageManager.Instance.Get("UILoading_updatefile"), (_slider.value).ToString("#%"));
     }
 }

@@ -3,3 +3,4 @@ E:\Mine\KBEGameDir\KBEGame\CSVTool\CSVTool\bin\Release\CSVTool.exe
 E:\Mine\KBEGameDir\KBEGame\CSVTool\CSVTool\bin\Release\CSVTool.pdb
 E:\Mine\KBEGameDir\KBEGame\CSVTool\CSVTool\obj\Release\CSVTool.exe
 E:\Mine\KBEGameDir\KBEGame\CSVTool\CSVTool\obj\Release\CSVTool.pdb
+E:\Mine\KBEGameDir\KBEGame\CSVTool\CSVTool\obj\Release\CSVTool.csprojResolveAssemblyReference.cache

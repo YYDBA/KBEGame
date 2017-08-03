@@ -5,3 +5,6 @@ NetWork_noteachable
 UILoading_vaildversion
 UILoading_readyupdate
 UILoading_updatefile
+UILoading_updatefail
+UILoading_extractres
+UILoading_updateover

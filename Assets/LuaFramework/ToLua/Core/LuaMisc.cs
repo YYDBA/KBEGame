@@ -43,30 +43,30 @@ namespace LuaInterface
     //让byte[] 压入成为lua string 而不是数组 userdata
     //也可以使用LuaByteBufferAttribute来标记byte[]
     public struct LuaByteBuffer
-    {        
-        public LuaByteBuffer(IntPtr source, int len)
+    {
+        public LuaByteBuffer(IntPtr source, int len) : this()
         {
             buffer = new byte[len];
-            Length = len;
+            this.Length = len;
             Marshal.Copy(source, buffer, 0, len);
         }
-        
-        public LuaByteBuffer(byte[] buf)
+
+        public LuaByteBuffer(byte[] buf) : this()
         {
             buffer = buf;
-            Length = buf.Length;            
+            this.Length = buf.Length;
         }
 
-        public LuaByteBuffer(byte[] buf, int len)
-        {            
+        public LuaByteBuffer(byte[] buf, int len) : this()
+        {
             buffer = buf;
-            Length = len;
+            this.Length = len;
         }
 
-        public LuaByteBuffer(System.IO.MemoryStream stream)
+        public LuaByteBuffer(System.IO.MemoryStream stream) : this()
         {
             buffer = stream.GetBuffer();
-            Length = (int)stream.Length;            
+            this.Length = (int)stream.Length;
         }
 
         public static implicit operator LuaByteBuffer(System.IO.MemoryStream stream)
@@ -74,15 +74,55 @@ namespace LuaInterface
             return new LuaByteBuffer(stream);
         }
 
-        public byte[] buffer;    
+        public byte[] buffer;
 
         public int Length
         {
             get;
             private set;
-        }    
-    }   
+        }
+    }
 
+    //public struct LuaByteBuffer
+    //{
+    //    public LuaByteBuffer(IntPtr source, int len)
+    //    {
+    //        buffer = new byte[len];
+    //        Length = len;
+    //        Marshal.Copy(source, buffer, 0, len);
+    //    }
+
+    //    public LuaByteBuffer(byte[] buf)
+    //    {
+    //        buffer = buf;
+    //        Length = buf.Length;
+    //    }
+
+    //    public LuaByteBuffer(byte[] buf, int len)
+    //    {
+    //        buffer = buf;
+    //        Length = len;
+    //    }
+
+    //    public LuaByteBuffer(System.IO.MemoryStream stream)
+    //    {
+    //        buffer = stream.GetBuffer();
+    //        Length = (int)stream.Length;
+    //    }
+
+    //    public static implicit operator LuaByteBuffer(System.IO.MemoryStream stream)
+    //    {
+    //        return new LuaByteBuffer(stream);
+    //    }
+
+    //    public byte[] buffer;
+
+    //    public int Length
+    //    {
+    //        get;
+    //        private set;
+    //    }
+    //}
     public class LuaOut<T> { }
     //public class LuaOutMetatable {}
     public class NullObject { }

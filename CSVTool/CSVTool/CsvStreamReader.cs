@@ -520,7 +520,7 @@ public class CsvStreamReader
                 FileStream fs = null;
                 using (fs = new FileStream(bytePath, FileMode.OpenOrCreate))
                 {
-                    byte[] bitArr = System.Text.Encoding.Default.GetBytes(str);
+                    byte[] bitArr = System.Text.Encoding.UTF8.GetBytes(str);
                     fs.Write(bitArr, 0, bitArr.Length);
                     fs.Flush();
                 }
@@ -547,7 +547,7 @@ public class CsvStreamReader
             FileStream fs = null;
             using (fs = new FileStream(bytePath,FileMode.OpenOrCreate))
             {
-                byte[] bitArr = System.Text.Encoding.Default.GetBytes(str);
+                byte[] bitArr = System.Text.Encoding.UTF8.GetBytes(str);
                 fs.Write(bitArr,0,bitArr.Length);
                 fs.Flush();
             }
