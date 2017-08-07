@@ -11,7 +11,6 @@ public class View : Base, IView {
 
     public virtual void OnEnter()
     {
-
     }
 
     public virtual void OnExit()
@@ -25,4 +24,5 @@ public class View : Base, IView {
     public virtual void OnResume()
     {
     }
+
 }

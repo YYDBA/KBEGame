@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour {
             View view = _contextStack.Peek();
             _contextStack.Pop();
             view.OnExit();
+            _uiDict.Remove(view.name);
         }
 
         if (_contextStack.Count != 0)
@@ -37,6 +38,7 @@ public class UIManager : MonoBehaviour {
         }
         View _view = CheckView(uiName);
         _contextStack.Push(_view);
+        _uiDict.Add(uiName, _view);
         _view.OnEnter();
     }
 
@@ -69,5 +71,17 @@ public class UIManager : MonoBehaviour {
         go.transform.localScale = Vector3.one;
         go.transform.localRotation = Quaternion.identity;
         return go.GetComponent<View>();
+    }
+
+    public T GetView<T>(string uiName) where T:View
+    {
+        View view;
+        _uiDict.TryGetValue(uiName, out view);
+        if(view == null)
+        {
+            Debug.LogError("lldf:" + uiName+":"+ _uiDict.Count);
+            return default(T);
+        }
+        return view as T;
     }
 }

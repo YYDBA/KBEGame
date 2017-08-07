@@ -9,4 +9,9 @@
         /// </summary>
         public static string UITOAST = "UIToast";
     }
+
+    public class SCENE
+    {
+        public static string LOGIN = "Login";
+    }
 }

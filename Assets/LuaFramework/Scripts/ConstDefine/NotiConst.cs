@@ -17,27 +17,44 @@ public class NotiConst
 
     #region View层消息通知
     /// <summary>
-    /// 更新消息
+    /// 同步消息
     /// </summary>
-    public const string UPDATE_MESSAGE = "UpdateMessage";
+    public const string NOTIFY_MESSAGE = "NotifyMessage";
     /// <summary>
-    /// 更新解包
+    /// 解包开始
+    /// </summary> 
+    public const string UPDATE_EXTRACT_START = "UpdateExtractStart";
+    /// <summary>
+    /// 解包中
     /// </summary>          
-    public const string UPDATE_EXTRACT = "UpdateExtract";
+    public const string UPDATE_EXTRACTING = "UpdateExtracting";
     /// <summary>
-    /// 更新下载
+    /// 解包结束
     /// </summary>
-    public const string UPDATE_DOWNLOAD = "UpdateDownload";
+    public const string UPDATE_EXTRACT_END = "UpdateExtractEnd";
+
     /// <summary>
-    /// 更新下载文件进度
+    /// 下载开始
     /// </summary>
-    public const string UPDATE_DOWNLOAD_FILE = "UpdateDownloadFile";
+    public const string UPDATE_DOWNLOAD_START = "UpdateDownloadStart";
     /// <summary>
-    /// 更新进度
+    /// 下载中
+    /// </summary>
+    public const string UPDATE_DOWNLOADING = "UpdateDownloading";
+    /// <summary>
+    /// 下载结束
+    /// </summary>
+    public const string UPDATE_DOWNLOAD_END = "UpdateDownloadEnd";
+    /// <summary>
+    /// 下载单个文件结束
+    /// </summary>
+    public const string UPDATE_DOWNLOAD = "UpdateDownloaded";
+    /// <summary>
+    /// 下载进度
     /// </summary>
     public const string UPDATE_PROGRESS = "UpdateProgress";
     /// <summary>
-    /// 网络通知
+    /// 网络状态通知
     /// </summary>
     public const string NETWORK_STATE = "NetworkState";
     #endregion

@@ -1,10 +1,11 @@
 uilogin_loginLogin
 uilogin_usernameUserName
 UILoading_connect
-NetWork_noteachable
 UILoading_vaildversion
 UILoading_readyupdate
 UILoading_updatefile
 UILoading_updatefail
 UILoading_extractres
+UILoading_extractfile
 UILoading_updateover
+NetWork_noteachable

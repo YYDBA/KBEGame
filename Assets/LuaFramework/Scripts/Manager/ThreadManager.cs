@@ -74,7 +74,7 @@ namespace LuaFramework {
                         ThreadEvent e = events.Dequeue();
                         try {
                             switch (e.Key) {
-                                case NotiConst.UPDATE_EXTRACT: {     //解压文件
+                                case NotiConst.UPDATE_EXTRACTING: {     //解压文件
                                     OnExtractFile(e.evParams);
                                 }
                                 break;

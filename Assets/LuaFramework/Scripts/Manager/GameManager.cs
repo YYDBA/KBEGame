@@ -5,39 +5,32 @@ using System.Collections.Generic;
 using LuaInterface;
 using System.Reflection;
 using System.IO;
-
+using UnityEngine.SceneManagement;
 
 namespace LuaFramework {
     public class GameManager : Manager {
-        protected static bool initialize = false;
         private List<string> downloadFiles = new List<string>();
-
-        void Awake()
-        {
-            UIManager.Instance.Push(Const.UI.UILOADING);
-        }
 
         void Start()
         {
+            UIManager.Instance.Push(Const.UI.UILOADING);
             Init();
         }
 
-        /// <summary>
-        /// 初始化
-        /// </summary>
-        void Init() {
+        void Init()
+        {
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
             Application.targetFrameRate = AppConst.GameFrameRate;
             if(CheckNetWork())
             {
-                facade.SendMessageCommand(NotiConst.UPDATE_MESSAGE, LanguageManager.Instance.Get("UILoading_vaildversion"));
+                facade.SendMessageCommand(NotiConst.NOTIFY_MESSAGE, LanguageManager.Instance.Get("UILoading_vaildversion"));
                 CheckExtractResource();
             }
         }
 
         public bool CheckNetWork()
         {
-            facade.SendMessageCommand(NotiConst.UPDATE_MESSAGE, LanguageManager.Instance.Get("UILoading_connect"));
+            facade.SendMessageCommand(NotiConst.NOTIFY_MESSAGE, LanguageManager.Instance.Get("UILoading_connect"));
             if (Application.internetReachability == NetworkReachability.NotReachable)
             {
                 UIToastView.Instance.Show(LanguageManager.Instance.Get("NetWork_noteachable"));
@@ -54,7 +47,7 @@ namespace LuaFramework {
               Directory.Exists(Util.DataPath + "lua/") && File.Exists(Util.DataPath + "files.txt");
             if (isExists || AppConst.DebugMode) {
                 StartCoroutine(OnUpdateResource());
-                return;   //文件已经解压过了，自己可添加检查文件列表逻辑
+                return;
             }
             StartCoroutine(OnExtractResource());    //启动释放协成 
         }
@@ -70,9 +63,9 @@ namespace LuaFramework {
             string outfile = dataPath + "files.txt";
             if (File.Exists(outfile)) File.Delete(outfile);
 
-            facade.SendMessageCommand(NotiConst.UPDATE_MESSAGE, LanguageManager.Instance.Get("UILoading_extractres"));
+            facade.SendMessageCommand(NotiConst.UPDATE_EXTRACT_START, LanguageManager.Instance.Get("UILoading_extractres"));
             yield return new WaitForSeconds(1f);
-            facade.SendMessageCommand(NotiConst.UPDATE_DOWNLOAD_FILE, 0);
+            facade.SendMessageCommand(NotiConst.UPDATE_EXTRACTING, 0);
             if (Application.platform == RuntimePlatform.Android) {
                 WWW www = new WWW(infile);
                 yield return www;
@@ -111,10 +104,10 @@ namespace LuaFramework {
                     File.Copy(infile, outfile, true);
                 }
                 yield return new WaitForEndOfFrame();
-                facade.SendMessageCommand(NotiConst.UPDATE_DOWNLOAD_FILE, (i + 1) / (float)total);
+                facade.SendMessageCommand(NotiConst.UPDATE_EXTRACTING, (i + 1) / (float)total);
             }
             yield return new WaitForSeconds(2f);
-
+            facade.SendMessageCommand(NotiConst.UPDATE_EXTRACT_END, "");
             //释放完成，开始启动更新资源
             StartCoroutine(OnUpdateResource());
         }
@@ -128,9 +121,9 @@ namespace LuaFramework {
                 yield break;
             }
             yield return new WaitForEndOfFrame();
-            facade.SendMessageCommand(NotiConst.UPDATE_MESSAGE, LanguageManager.Instance.Get("UILoading_readyupdate"));
-            yield return new WaitForEndOfFrame();
-            facade.SendMessageCommand(NotiConst.UPDATE_DOWNLOAD_FILE,0);
+            facade.SendMessageCommand(NotiConst.UPDATE_DOWNLOAD_START, LanguageManager.Instance.Get("UILoading_readyupdate"));
+            yield return new WaitForSeconds(1f);
+            facade.SendMessageCommand(NotiConst.UPDATE_DOWNLOADING, 0);
             string dataPath = Util.DataPath;  //数据目录
             string url = AppConst.WebUrl;
             string random = DateTime.Now.ToString("yyyymmddhhmmss");
@@ -166,21 +159,19 @@ namespace LuaFramework {
                     canUpdate = !remoteMd5.Equals(localMd5);
                     if (canUpdate) File.Delete(localfile);
                 }
-                facade.SendMessageCommand(NotiConst.UPDATE_DOWNLOAD_FILE, (i+1) / (float)total);
+                facade.SendMessageCommand(NotiConst.UPDATE_DOWNLOADING, (i+1) / (float)total);
                 if (canUpdate) {   //本地缺少文件
                     BeginDownload(fileUrl, localfile);//这里都是资源文件，用线程下载
                     while (!(IsDownOK(localfile))) { yield return new WaitForEndOfFrame(); }
                 }
             }
             yield return new WaitForEndOfFrame();
-            facade.SendMessageCommand(NotiConst.UPDATE_DOWNLOAD_FILE, 1);
-            yield return new WaitForSeconds(2f);
-            facade.SendMessageCommand(NotiConst.UPDATE_MESSAGE, LanguageManager.Instance.Get("UILoading_updateover"));
+            facade.SendMessageCommand(NotiConst.UPDATE_DOWNLOAD_END, LanguageManager.Instance.Get("UILoading_updateover"));
             OnResourceInited();
         }
 
         void OnUpdateFailed(string file) {
-            facade.SendMessageCommand(NotiConst.UPDATE_MESSAGE, LanguageManager.Instance.Get("UILoading_updatefail"));
+            facade.SendMessageCommand(NotiConst.NOTIFY_MESSAGE, LanguageManager.Instance.Get("UILoading_updatefail"));
         }
 
         /// <summary>
@@ -208,7 +199,7 @@ namespace LuaFramework {
         /// <param name="data"></param>
         void OnThreadCompleted(NotiData data) {
             switch (data.evName) {
-                case NotiConst.UPDATE_EXTRACT:  //解压一个完成
+                case NotiConst.UPDATE_EXTRACTING:  //解压一个完成
                 //
                 break;
                 case NotiConst.UPDATE_DOWNLOAD: //下载一个完成
@@ -233,13 +224,15 @@ namespace LuaFramework {
         }
 
         void OnInitialize() {
+            AsyncOperation async = SceneManager.LoadSceneAsync(Const.SCENE.LOGIN);
+            SceneManager.sceneLoaded += SceneManager_sceneLoaded;
             LuaManager.InitStart();
+
+            #region obsolete
             //LuaManager.DoFile("Logic/Game");         //加载游戏
             //LuaManager.DoFile("Logic/Network");      //加载网络
             //NetManager.OnInit();                     //初始化网络
             //Util.CallMethod("Game", "OnInitOK");     //初始化完成
-
-            initialize = true;
 
             //类对象池测试
             //var classObjPool = ObjPoolManager.CreatePool<TestObjectClass>(OnPoolGetElement, OnPoolPushElement);
@@ -267,6 +260,19 @@ namespace LuaFramework {
             //backObj.transform.SetParent(null);
 
             //Debug.Log("TestGameObject--->>>" + backObj);
+            #endregion
+        }
+
+        private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
+        {
+            if (arg0.name.Equals(Const.SCENE.LOGIN))
+            {
+                UILoadingView _view = UIManager.Instance.GetView<UILoadingView>(Const.UI.UILOADING);
+                if(_view)
+                {
+                    UIManager.Instance.Pop();
+                }
+            }
         }
 
         /// <summary>
