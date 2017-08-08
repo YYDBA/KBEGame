@@ -1,12 +1,12 @@
 
 CtrlNames = {
+    UILogin = "UILoginCtrl",
 	Prompt = "PromptCtrl",
 	Message = "MessageCtrl"
 }
 
 PanelNames = {
-	"PromptPanel",	
-	"MessagePanel",
+	"UILoginPanel",	
 }
 
 --协议类型--

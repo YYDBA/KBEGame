@@ -8,6 +8,10 @@ public class ViewWrap
 	{
 		L.BeginClass(typeof(View), typeof(Base));
 		L.RegFunction("OnMessage", OnMessage);
+		L.RegFunction("OnEnter", OnEnter);
+		L.RegFunction("OnExit", OnExit);
+		L.RegFunction("OnPause", OnPause);
+		L.RegFunction("OnResume", OnResume);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.EndClass();
@@ -22,6 +26,70 @@ public class ViewWrap
 			View obj = (View)ToLua.CheckObject<View>(L, 1);
 			IMessage arg0 = (IMessage)ToLua.CheckObject<IMessage>(L, 2);
 			obj.OnMessage(arg0);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int OnEnter(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			View obj = (View)ToLua.CheckObject<View>(L, 1);
+			obj.OnEnter();
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int OnExit(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			View obj = (View)ToLua.CheckObject<View>(L, 1);
+			obj.OnExit();
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int OnPause(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			View obj = (View)ToLua.CheckObject<View>(L, 1);
+			obj.OnPause();
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int OnResume(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			View obj = (View)ToLua.CheckObject<View>(L, 1);
+			obj.OnResume();
 			return 0;
 		}
 		catch (Exception e)

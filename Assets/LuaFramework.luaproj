@@ -357,6 +357,7 @@
     <Compile Include="LuaFramework\Lua\Common\protocal.lua" />
     <Compile Include="LuaFramework\Lua\Controller\MessageCtrl.lua" />
     <Compile Include="LuaFramework\Lua\Controller\PromptCtrl.lua" />
+    <Compile Include="LuaFramework\Lua\Controller\UILoginCtrl.lua" />
     <Compile Include="LuaFramework\Lua\eventlib.lua" />
     <Compile Include="LuaFramework\Lua\events.lua" />
     <Compile Include="LuaFramework\Lua\Logic\CtrlManager.lua" />
@@ -366,6 +367,7 @@
     <Compile Include="LuaFramework\Lua\Main.lua" />
     <Compile Include="LuaFramework\Lua\View\MessagePanel.lua" />
     <Compile Include="LuaFramework\Lua\View\PromptPanel.lua" />
+    <Compile Include="LuaFramework\Lua\View\UILoginView.lua" />
     <Compile Include="LuaFramework\ToLua\Lua\cjson\util.lua" />
     <Compile Include="LuaFramework\ToLua\Lua\event.lua" />
     <Compile Include="LuaFramework\ToLua\Lua\jit\bc.lua" />

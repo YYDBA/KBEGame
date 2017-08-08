@@ -5,9 +5,13 @@
         /// </summary>
         public static string UILOADING = "UILoading";
         /// <summary>
-        /// Unity Toast
+        /// Unity Toast UI
         /// </summary>
         public static string UITOAST = "UIToast";
+        /// <summary>
+        /// Login UI
+        /// </summary>
+        public static string UILOGIN = "UILogin";
     }
 
     public class SCENE

@@ -33,13 +33,6 @@ public class UILoadingView : View
     IMessage data;
     Action task = null;
     bool bUpdate = false;
-    enum ViewLayout
-    {
-        /// <summary>
-        /// 初始化时更新
-        /// </summary>
-        UPDATE,
-    }
 
 	void Awake()
     {

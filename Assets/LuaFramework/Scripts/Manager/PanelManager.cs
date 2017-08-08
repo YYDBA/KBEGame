@@ -15,7 +15,7 @@ namespace LuaFramework {
                     if (go != null) parent = go.transform;
                 }
                 return parent;
-            }
+            } 
         }
 
         /// <summary>

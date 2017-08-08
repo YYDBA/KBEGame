@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2047898139
+CRC: 627316002
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -58,4 +58,7 @@ AssetBundleManifest:
       Dependencies: {}
     Info_18:
       Name: lua/lua.unity3d
+      Dependencies: {}
+    Info_19:
+      Name: uilogin.unity3d
       Dependencies: {}

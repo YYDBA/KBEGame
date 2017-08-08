@@ -15,10 +15,12 @@ public class View : Base, IView {
 
     public virtual void OnExit()
     {
+        GetComponent<Canvas>().enabled = false;
     }
 
     public virtual void OnPause()
     {
+
     }
 
     public virtual void OnResume()
