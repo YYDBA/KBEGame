@@ -1,8 +1,8 @@
 
 CtrlNames = {
     UILogin = "UILoginCtrl",
-	Prompt = "PromptCtrl",
-	Message = "MessageCtrl"
+--	Prompt = "PromptCtrl",
+--	Message = "MessageCtrl"
 }
 
 PanelNames = {

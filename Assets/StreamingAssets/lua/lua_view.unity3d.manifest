@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1159310210
+CRC: 3538962713
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 1f15ada123b6710ee89bc1a79552093d
+    Hash: 0feb420081cb0ba49515e3d777812719
   TypeTreeHash:
     serializedVersion: 2
     Hash: 1033bf7ddfd4c6d43e7a6382c0a0a61a
@@ -12,7 +12,7 @@ ClassTypes:
 - Class: 49
   Script: {instanceID: 0}
 Assets:
+- Assets/Lua/View/UILoginPanel.lua.bytes
 - Assets/Lua/View/MessagePanel.lua.bytes
 - Assets/Lua/View/PromptPanel.lua.bytes
-- Assets/Lua/View/UILoginView.lua.bytes
 Dependencies: []

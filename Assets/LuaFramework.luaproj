@@ -367,7 +367,7 @@
     <Compile Include="LuaFramework\Lua\Main.lua" />
     <Compile Include="LuaFramework\Lua\View\MessagePanel.lua" />
     <Compile Include="LuaFramework\Lua\View\PromptPanel.lua" />
-    <Compile Include="LuaFramework\Lua\View\UILoginView.lua" />
+    <Compile Include="LuaFramework\Lua\View\UILoginPanel.lua" />
     <Compile Include="LuaFramework\ToLua\Lua\cjson\util.lua" />
     <Compile Include="LuaFramework\ToLua\Lua\event.lua" />
     <Compile Include="LuaFramework\ToLua\Lua\jit\bc.lua" />

@@ -231,6 +231,9 @@ namespace LuaFramework {
             AsyncOperation async = SceneManager.LoadSceneAsync(Const.SCENE.LOGIN);
             SceneManager.sceneLoaded += SceneManager_sceneLoaded;
             LuaManager.InitStart();
+            Debug.LogError("###########");
+            LuaManager.DoFile("Logic/Game");
+            Util.CallMethod("Game", "OnInitOK");
         }
 
         private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
@@ -243,7 +246,7 @@ namespace LuaFramework {
                     UIManager.Instance.Pop();
                 }
                 RootManager.Instance.kbeMain.SetActive(true);
-                //UIManager.Instance.Push(Const.UI.UILOGIN);
+                
             }
         }
 

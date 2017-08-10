@@ -5,17 +5,15 @@ UILoginCtrl = {};
 local this = UILoginCtrl;
 
 local panel;
-local prompt;
+local uiLogin;
 local transform;
 local gameObject;
 --构建函数--
 function UILoginCtrl.New()
-	logWarn("UILoginCtrl.New--->>");
 	return this;
 end
 
 function UILoginCtrl.Awake()
-	logWarn("UILoginCtrl.Awake--->>");
 	panelMgr:CreatePanel('UILogin', this.OnCreate);
 end
 
@@ -23,13 +21,12 @@ end
 function UILoginCtrl.OnCreate(obj)
 	gameObject = obj;
 	transform = obj.transform;
+	uiLogin = transform:GetComponent('LuaBehaviour');
+	uiLogin:AddClick(UILoginPanel.btn, this.OnClick);
+end
 
-	panel = transform:GetComponent('UIPanel');
-	prompt = transform:GetComponent('LuaBehaviour');
-	logWarn("Start lua--->>"..gameObject.name);
-
-	--prompt:AddClick(PromptPanel.btnOpen, this.OnClick);
-	--resMgr:LoadPrefab('prompt', { 'PromptItem' }, this.InitPanel);
+function UILoginCtrl.OnClick(go)
+    print(go.name);
 end
 
 --endregion
