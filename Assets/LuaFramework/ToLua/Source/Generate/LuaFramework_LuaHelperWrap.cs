@@ -14,6 +14,7 @@ public class LuaFramework_LuaHelperWrap
 		L.RegFunction("GetSoundManager", GetSoundManager);
 		L.RegFunction("OnCallLuaFunc", OnCallLuaFunc);
 		L.RegFunction("OnJsonCallFunc", OnJsonCallFunc);
+		L.RegFunction("GetLoginMoudel", GetLoginMoudel);
 		L.EndStaticLibs();
 	}
 
@@ -125,6 +126,22 @@ public class LuaFramework_LuaHelperWrap
 			LuaFunction arg1 = ToLua.CheckLuaFunction(L, 2);
 			LuaFramework.LuaHelper.OnJsonCallFunc(arg0, arg1);
 			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int GetLoginMoudel(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 0);
+			Client.LoginMoudle o = LuaFramework.LuaHelper.GetLoginMoudel();
+			ToLua.PushObject(L, o);
+			return 1;
 		}
 		catch (Exception e)
 		{

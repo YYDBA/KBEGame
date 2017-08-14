@@ -37,6 +37,11 @@ public class UIManager : MonoBehaviour {
             view.OnPause();
         }
         View _view = CheckView(uiName);
+        Push(uiName, _view);
+    }
+
+    public void Push(string uiName,View _view)
+    {
         _contextStack.Push(_view);
         _uiDict.Add(uiName, _view);
         _view.OnEnter();

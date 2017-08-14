@@ -2,11 +2,11 @@
 using System;
 using System.Collections.Generic;
 using LuaInterface;
-using LuaFramework;
 
 using BindType = ToLuaMenu.BindType;
 using UnityEngine.UI;
-using System.Reflection;
+using LuaFramework;
+using Client;
 
 public static class CustomSettings
 {
@@ -93,24 +93,24 @@ public static class CustomSettings
 #endif
       
         _GT(typeof(Behaviour)),
-        _GT(typeof(MonoBehaviour)),        
+        _GT(typeof(MonoBehaviour)),
         _GT(typeof(GameObject)),
         _GT(typeof(TrackedReference)),
         _GT(typeof(Application)),
         _GT(typeof(Physics)),
         _GT(typeof(Collider)),
-        _GT(typeof(Time)),        
+        _GT(typeof(Time)),
         _GT(typeof(Texture)),
         _GT(typeof(Texture2D)),
-        _GT(typeof(Shader)),        
+        _GT(typeof(Shader)),
         _GT(typeof(Renderer)),
         _GT(typeof(WWW)),
-        _GT(typeof(Screen)),        
+        _GT(typeof(Screen)),
         _GT(typeof(CameraClearFlags)),
-        _GT(typeof(AudioClip)),        
+        _GT(typeof(AudioClip)),
         _GT(typeof(AssetBundle)),
         _GT(typeof(ParticleSystem)),
-        _GT(typeof(AsyncOperation)).SetBaseType(typeof(System.Object)),        
+        _GT(typeof(AsyncOperation)).SetBaseType(typeof(System.Object)),
         _GT(typeof(LightType)),
         _GT(typeof(SleepTimeout)),
 #if UNITY_5_3_OR_NEWER && !UNITY_5_6_OR_NEWER
@@ -120,8 +120,8 @@ public static class CustomSettings
         _GT(typeof(Input)),
         _GT(typeof(KeyCode)),
         _GT(typeof(SkinnedMeshRenderer)),
-        _GT(typeof(Space)),      
-       
+        _GT(typeof(Space)),
+
 
         _GT(typeof(MeshRenderer)),
 #if !UNITY_5_4_OR_NEWER
@@ -132,23 +132,23 @@ public static class CustomSettings
 
         _GT(typeof(BoxCollider)),
         _GT(typeof(MeshCollider)),
-        _GT(typeof(SphereCollider)),        
+        _GT(typeof(SphereCollider)),
         _GT(typeof(CharacterController)),
         _GT(typeof(CapsuleCollider)),
-        
-        _GT(typeof(Animation)),        
-        _GT(typeof(AnimationClip)).SetBaseType(typeof(UnityEngine.Object)),        
+
+        _GT(typeof(Animation)),
+        _GT(typeof(AnimationClip)).SetBaseType(typeof(UnityEngine.Object)),
         _GT(typeof(AnimationState)),
         _GT(typeof(AnimationBlendMode)),
-        _GT(typeof(QueueMode)),  
+        _GT(typeof(QueueMode)),
         _GT(typeof(PlayMode)),
         _GT(typeof(WrapMode)),
 
         _GT(typeof(QualitySettings)),
-        _GT(typeof(RenderSettings)),                                                   
-        _GT(typeof(BlendWeights)),           
-        _GT(typeof(RenderTexture)), 
-		_GT(typeof(Resources)),      
+        _GT(typeof(RenderSettings)),
+        _GT(typeof(BlendWeights)),
+        _GT(typeof(RenderTexture)),
+        _GT(typeof(Resources)),      
           
         //for LuaFramework
         _GT(typeof(RectTransform)),
@@ -167,9 +167,12 @@ public static class CustomSettings
         _GT(typeof(TimerManager)),
         _GT(typeof(ThreadManager)),
         _GT(typeof(NetworkManager)),
-        _GT(typeof(ResourceManager)),		  
-    };
+        _GT(typeof(ResourceManager)),
 
+        // Client
+        _GT(typeof(LoginMoudle)),
+        _GT(typeof(InputField)),
+    };
     public static List<Type> dynamicList = new List<Type>()
     {
         typeof(MeshRenderer),

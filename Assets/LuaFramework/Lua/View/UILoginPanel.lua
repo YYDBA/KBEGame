@@ -16,7 +16,10 @@ function UILoginPanel.Awake(obj)
 end
 
 function UILoginPanel.InitPanel()
-	this.btn = transform:Find("Button").gameObject;
+	this.btnLogin = transform:Find("btnLogin").gameObject;
+    this.btnReg = transform:Find("btnReg").gameObject;
+    this.inputAccount = transform:Find("InputAccount"):GetComponent('InputField');
+    this.inputPwd = transform:Find("InputPwd"):GetComponent('InputField');
 end
 
 --endregion

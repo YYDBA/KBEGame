@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using LuaInterface;
 using System;
+using Client;
 
 namespace LuaFramework {
     public static class LuaHelper {
@@ -68,6 +69,15 @@ namespace LuaFramework {
         public static void OnJsonCallFunc(string data, LuaFunction func) {
             Debug.LogWarning("OnJsonCallback data:>>" + data + " lenght:>>" + data.Length);
             if (func != null) func.Call(data);
+        }
+
+        public static LoginMoudle GetLoginMoudel()
+        {
+            if(LoginMoudle.Instance == null)
+            {
+                LoginMoudle.Instance = new LoginMoudle();
+            }
+            return LoginMoudle.Instance;
         }
     }
 }

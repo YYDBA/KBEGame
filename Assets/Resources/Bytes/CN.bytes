@@ -1,5 +1,6 @@
-uilogin_login登录
-uilogin_username用户名
+UILogin_login登录
+UIlogin_userName用户名
+UILogin_reg注册
 UILoading_connect正在连接服务器
 UILoading_vaildversion正在校验版本信息...
 UILoading_readyupdate准备更新文件...

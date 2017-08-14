@@ -1,7 +1,8 @@
 ,中文,英文
 ID,CN,EN
-uilogin_login,登录,Login
-uilogin_username,用户名,UserName
+UILogin_login,登录,Login
+UIlogin_userName,用户名,UserName
+UILogin_reg,注册,
 UILoading_connect,正在连接服务器,
 UILoading_vaildversion,正在校验版本信息...,
 UILoading_readyupdate,准备更新文件...,

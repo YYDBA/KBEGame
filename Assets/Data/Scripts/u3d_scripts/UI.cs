@@ -36,7 +36,6 @@ public class UI : MonoBehaviour
 	void Start () 
 	{
 		installEvents();
-		Application.LoadLevel("login");
 	}
 
 	void installEvents()

@@ -5,10 +5,6 @@ CtrlNames = {
 --	Message = "MessageCtrl"
 }
 
-PanelNames = {
-	"UILoginPanel",	
-}
-
 --协议类型--
 ProtocalType = {
 	BINARY = 0,
@@ -23,6 +19,7 @@ Util = LuaFramework.Util;
 AppConst = LuaFramework.AppConst;
 LuaHelper = LuaFramework.LuaHelper;
 ByteBuffer = LuaFramework.ByteBuffer;
+LoginMoudle = LuaHelper.GetLoginMoudel();
 
 resMgr = LuaHelper.GetResManager();
 panelMgr = LuaHelper.GetPanelManager();

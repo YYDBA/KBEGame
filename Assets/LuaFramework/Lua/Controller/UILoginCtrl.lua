@@ -22,11 +22,17 @@ function UILoginCtrl.OnCreate(obj)
 	gameObject = obj;
 	transform = obj.transform;
 	uiLogin = transform:GetComponent('LuaBehaviour');
-	uiLogin:AddClick(UILoginPanel.btn, this.OnClick);
+	uiLogin:AddClick(UILoginPanel.btnLogin, this.OnLogin);
+	uiLogin:AddClick(UILoginPanel.btnReg, this.OnReg);
+    LoginMoudle:Init();
 end
 
-function UILoginCtrl.OnClick(go)
-    print(go.name);
+function UILoginCtrl.OnLogin(go)
+    LoginMoudle:Login(UILoginPanel.inputAccount.text,UILoginPanel.inputPwd.text);
+end
+
+function UILoginCtrl.OnReg(go)
+    --LoginMoudle.Login();
 end
 
 --endregion

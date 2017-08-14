@@ -11,6 +11,7 @@ public class View : Base, IView {
 
     public virtual void OnEnter()
     {
+        GetComponent<Canvas>().enabled = true;
     }
 
     public virtual void OnExit()
@@ -20,11 +21,11 @@ public class View : Base, IView {
 
     public virtual void OnPause()
     {
-
+        GetComponent<Canvas>().enabled = false;
     }
 
     public virtual void OnResume()
     {
+        GetComponent<Canvas>().enabled = true;
     }
-
 }
