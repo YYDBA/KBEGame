@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class RootManager : MonoBehaviour {
     public Transform UIRoot;
-    public Camera UICamera;
+    public Transform ModelRoot;
+    public Camera MainCamera;
     public GameObject kbeMain;
+    public EasyTouch easyTouch;
     public static RootManager Instance;
     void Awake()
     {

@@ -8,10 +8,34 @@ public class Client_LoginMoudleWrap
 	{
 		L.BeginClass(typeof(Client.LoginMoudle), typeof(System.Object));
 		L.RegFunction("Init", Init);
+		L.RegFunction("info", info);
+		L.RegFunction("err", err);
 		L.RegFunction("Login", Login);
+		L.RegFunction("createAccount", createAccount);
+		L.RegFunction("onCreateAccountResult", onCreateAccountResult);
+		L.RegFunction("onConnectionState", onConnectionState);
+		L.RegFunction("onLoginFailed", onLoginFailed);
+		L.RegFunction("onVersionNotMatch", onVersionNotMatch);
+		L.RegFunction("onScriptVersionNotMatch", onScriptVersionNotMatch);
+		L.RegFunction("onLoginBaseappFailed", onLoginBaseappFailed);
+		L.RegFunction("onLoginBaseapp", onLoginBaseapp);
+		L.RegFunction("onReloginBaseappFailed", onReloginBaseappFailed);
+		L.RegFunction("onReloginBaseappSuccessfully", onReloginBaseappSuccessfully);
+		L.RegFunction("onLoginSuccessfully", onLoginSuccessfully);
+		L.RegFunction("onKicked", onKicked);
+		L.RegFunction("Loginapp_importClientMessages", Loginapp_importClientMessages);
+		L.RegFunction("Baseapp_importClientMessages", Baseapp_importClientMessages);
+		L.RegFunction("Baseapp_importClientEntityDef", Baseapp_importClientEntityDef);
+		L.RegFunction("onReqAvatarList", onReqAvatarList);
+		L.RegFunction("onCreateAvatarResult", onCreateAvatarResult);
+		L.RegFunction("onRemoveAvatar", onRemoveAvatar);
+		L.RegFunction("onDisconnected", onDisconnected);
+		L.RegFunction("onReloginBaseappTimer", onReloginBaseappTimer);
 		L.RegFunction("New", _CreateClient_LoginMoudle);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("Instance", get_Instance, set_Instance);
+		L.RegVar("ui_state", get_ui_state, set_ui_state);
+		L.RegVar("showReliveGUI", get_showReliveGUI, set_showReliveGUI);
 		L.EndClass();
 	}
 
@@ -44,9 +68,44 @@ public class Client_LoginMoudleWrap
 	{
 		try
 		{
-			ToLua.CheckArgsCount(L, 1);
+			ToLua.CheckArgsCount(L, 2);
 			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
-			obj.Init();
+			LuaFunction arg0 = ToLua.CheckLuaFunction(L, 2);
+			obj.Init(arg0);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int info(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
+			string arg0 = ToLua.CheckString(L, 2);
+			obj.info(arg0);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int err(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
+			string arg0 = ToLua.CheckString(L, 2);
+			obj.err(arg0);
 			return 0;
 		}
 		catch (Exception e)
@@ -74,6 +133,348 @@ public class Client_LoginMoudleWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int createAccount(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 3);
+			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
+			string arg0 = ToLua.CheckString(L, 2);
+			string arg1 = ToLua.CheckString(L, 3);
+			obj.createAccount(arg0, arg1);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int onCreateAccountResult(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 3);
+			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
+			ushort arg0 = (ushort)LuaDLL.luaL_checknumber(L, 2);
+			byte[] arg1 = ToLua.CheckByteBuffer(L, 3);
+			obj.onCreateAccountResult(arg0, arg1);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int onConnectionState(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			obj.onConnectionState(arg0);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int onLoginFailed(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
+			ushort arg0 = (ushort)LuaDLL.luaL_checknumber(L, 2);
+			obj.onLoginFailed(arg0);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int onVersionNotMatch(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 3);
+			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
+			string arg0 = ToLua.CheckString(L, 2);
+			string arg1 = ToLua.CheckString(L, 3);
+			obj.onVersionNotMatch(arg0, arg1);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int onScriptVersionNotMatch(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 3);
+			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
+			string arg0 = ToLua.CheckString(L, 2);
+			string arg1 = ToLua.CheckString(L, 3);
+			obj.onScriptVersionNotMatch(arg0, arg1);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int onLoginBaseappFailed(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
+			ushort arg0 = (ushort)LuaDLL.luaL_checknumber(L, 2);
+			obj.onLoginBaseappFailed(arg0);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int onLoginBaseapp(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
+			obj.onLoginBaseapp();
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int onReloginBaseappFailed(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
+			ushort arg0 = (ushort)LuaDLL.luaL_checknumber(L, 2);
+			obj.onReloginBaseappFailed(arg0);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int onReloginBaseappSuccessfully(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
+			obj.onReloginBaseappSuccessfully();
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int onLoginSuccessfully(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 4);
+			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
+			ulong arg0 = LuaDLL.tolua_checkuint64(L, 2);
+			int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+			KBEngine.Account arg2 = (KBEngine.Account)ToLua.CheckObject<KBEngine.Account>(L, 4);
+			obj.onLoginSuccessfully(arg0, arg1, arg2);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int onKicked(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
+			ushort arg0 = (ushort)LuaDLL.luaL_checknumber(L, 2);
+			obj.onKicked(arg0);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int Loginapp_importClientMessages(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
+			obj.Loginapp_importClientMessages();
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int Baseapp_importClientMessages(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
+			obj.Baseapp_importClientMessages();
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int Baseapp_importClientEntityDef(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
+			obj.Baseapp_importClientEntityDef();
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int onReqAvatarList(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
+			System.Collections.Generic.Dictionary<ulong,System.Collections.Generic.Dictionary<string,object>> arg0 = (System.Collections.Generic.Dictionary<ulong,System.Collections.Generic.Dictionary<string,object>>)ToLua.CheckObject(L, 2, typeof(System.Collections.Generic.Dictionary<ulong,System.Collections.Generic.Dictionary<string,object>>));
+			obj.onReqAvatarList(arg0);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int onCreateAvatarResult(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 4);
+			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
+			byte arg0 = (byte)LuaDLL.luaL_checknumber(L, 2);
+			object arg1 = ToLua.ToVarObject(L, 3);
+			System.Collections.Generic.Dictionary<ulong,System.Collections.Generic.Dictionary<string,object>> arg2 = (System.Collections.Generic.Dictionary<ulong,System.Collections.Generic.Dictionary<string,object>>)ToLua.CheckObject(L, 4, typeof(System.Collections.Generic.Dictionary<ulong,System.Collections.Generic.Dictionary<string,object>>));
+			obj.onCreateAvatarResult(arg0, arg1, arg2);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int onRemoveAvatar(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 3);
+			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
+			ulong arg0 = LuaDLL.tolua_checkuint64(L, 2);
+			System.Collections.Generic.Dictionary<ulong,System.Collections.Generic.Dictionary<string,object>> arg1 = (System.Collections.Generic.Dictionary<ulong,System.Collections.Generic.Dictionary<string,object>>)ToLua.CheckObject(L, 3, typeof(System.Collections.Generic.Dictionary<ulong,System.Collections.Generic.Dictionary<string,object>>));
+			obj.onRemoveAvatar(arg0, arg1);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int onDisconnected(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
+			obj.onDisconnected();
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int onReloginBaseappTimer(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			Client.LoginMoudle obj = (Client.LoginMoudle)ToLua.CheckObject<Client.LoginMoudle>(L, 1);
+			obj.onReloginBaseappTimer();
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int get_Instance(IntPtr L)
 	{
 		try
@@ -84,6 +485,44 @@ public class Client_LoginMoudleWrap
 		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_ui_state(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			Client.LoginMoudle obj = (Client.LoginMoudle)o;
+			int ret = obj.ui_state;
+			LuaDLL.lua_pushinteger(L, ret);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index ui_state on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_showReliveGUI(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			Client.LoginMoudle obj = (Client.LoginMoudle)o;
+			bool ret = obj.showReliveGUI;
+			LuaDLL.lua_pushboolean(L, ret);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index showReliveGUI on a nil value");
 		}
 	}
 
@@ -99,6 +538,44 @@ public class Client_LoginMoudleWrap
 		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_ui_state(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			Client.LoginMoudle obj = (Client.LoginMoudle)o;
+			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+			obj.ui_state = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index ui_state on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_showReliveGUI(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			Client.LoginMoudle obj = (Client.LoginMoudle)o;
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			obj.showReliveGUI = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index showReliveGUI on a nil value");
 		}
 	}
 }

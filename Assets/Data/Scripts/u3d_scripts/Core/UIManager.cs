@@ -75,6 +75,7 @@ public class UIManager : MonoBehaviour {
         rect.offsetMax = Vector2.zero;
         go.transform.localScale = Vector3.one;
         go.transform.localRotation = Quaternion.identity;
+        go.transform.localPosition = Vector3.zero;
         return go.GetComponent<View>();
     }
 

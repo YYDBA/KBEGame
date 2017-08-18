@@ -24,6 +24,7 @@ namespace LuaFramework {
             rect.offsetMax = Vector2.zero;
             go.transform.localScale = Vector3.one;
             go.transform.localRotation = Quaternion.identity;
+            go.transform.localPosition = Vector3.zero;
             go.AddComponent<LuaBehaviour>();
             UIManager.Instance.Push(assetName, go.GetComponent<View>());
             if (func != null) func.Call(go);

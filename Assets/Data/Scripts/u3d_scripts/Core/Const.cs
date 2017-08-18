@@ -17,5 +17,6 @@
     public class SCENE
     {
         public static string LOGIN = "Login";
+        public static string BATTLE = "Battle";
     }
 }

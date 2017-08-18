@@ -1,7 +1,9 @@
 ﻿using KBEngine;
+using LuaInterface;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Client {
     public class LoginMoudle
@@ -16,9 +18,9 @@ namespace Client {
         private UInt64 selAvatarDBID = 0;
         public bool showReliveGUI = false;
         private string labelMsg = "";
-        private Color labelColor = Color.green;
-
+        protected byte[] bytes = System.Text.Encoding.UTF8.GetBytes("kbengine_unity3d_demo");
         bool startRelogin = false;
+        private LuaFunction func;
         void RegisterEvent()
         {
             KBEngine.Event.registerOut("onKicked", this, "onKicked");
@@ -45,8 +47,9 @@ namespace Client {
             KBEngine.Event.registerOut("onRemoveAvatar", this, "onRemoveAvatar");
         }
 
-        public void Init()
+        public void Init(LuaFunction _func)
         {
+            this.func = _func;
             RegisterEvent();
         }
 
@@ -57,28 +60,36 @@ namespace Client {
 
         public void info(string s)
         {
-            Debug.LogError(s);
-            labelColor = Color.green;
             labelMsg = s;
+            if(func != null)
+            {
+                func.Call(s);
+            }
         }
 
         public void err(string s)
         {
-            Debug.LogError(s);
-            labelColor = Color.red;
             labelMsg = s;
+            if (func != null)
+            {
+                func.Call(s);
+            }
         }
 
         public void Login(string account, string pwd)
         {
-            KBEngine.Event.fireIn("login", account, pwd, System.Text.Encoding.UTF8.GetBytes("kbengine_unity3d_demo"));
+#if DEBUG
+            SceneManager.LoadSceneAsync(Const.SCENE.BATTLE);
+#else
+            info("connect to server...(连接到服务端...)");
+            KBEngine.Event.fireIn("login", account, pwd, bytes);
+#endif
         }
 
-        public void createAccount()
+        public void createAccount(string account, string pwd)
         {
             info("connect to server...(连接到服务端...)");
-
-            KBEngine.Event.fireIn("createAccount", stringAccount, stringPasswd, System.Text.Encoding.UTF8.GetBytes("kbengine_unity3d_demo"));
+            KBEngine.Event.fireIn("createAccount", account, pwd, bytes);
         }
 
         public void onCreateAccountResult(UInt16 retcode, byte[] datas)

@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class ShowFPS : MonoBehaviour {
-
+#if DEBUG
     public float f_UpdateInterval = 0.5F;
 
     private float f_LastInterval;
@@ -38,4 +38,5 @@ public class ShowFPS : MonoBehaviour {
             f_LastInterval = Time.realtimeSinceStartup;
         }
     }
+#endif
 }

@@ -24,9 +24,13 @@ function UILoginCtrl.OnCreate(obj)
 	uiLogin = transform:GetComponent('LuaBehaviour');
 	uiLogin:AddClick(UILoginPanel.btnLogin, this.OnLogin);
 	uiLogin:AddClick(UILoginPanel.btnReg, this.OnReg);
-    LoginMoudle:Init();
+    LoginMoudle:Init(this.OnMsg);
 end
 
+function UILoginCtrl.OnMsg(args)
+    print('lua msg:'..args);
+    UILoginPanel.txtTip.text = args;
+end
 function UILoginCtrl.OnLogin(go)
     LoginMoudle:Login(UILoginPanel.inputAccount.text,UILoginPanel.inputPwd.text);
 end

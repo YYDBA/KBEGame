@@ -20,6 +20,7 @@ function UILoginPanel.InitPanel()
     this.btnReg = transform:Find("btnReg").gameObject;
     this.inputAccount = transform:Find("InputAccount"):GetComponent('InputField');
     this.inputPwd = transform:Find("InputPwd"):GetComponent('InputField');
+    this.txtTip = transform:Find("Tip"):GetComponent('Text');
 end
 
 --endregion
